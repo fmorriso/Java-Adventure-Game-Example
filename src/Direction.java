@@ -14,7 +14,8 @@ public enum Direction {
 
     public int getIndex() {return index;}
 
-    /**
+    /** Return a string representation of one of the enumerated values based on a
+     * corresponding numeric value.
      * @param i - a whole number that is the numeric value of one of the enumerations.
      * @return - String containing the name of the corresponding enumerations
      */
@@ -41,10 +42,8 @@ public enum Direction {
      * @return - a value from this enumeration or null if not found.
      */
     public static Direction getDirectionFromAbbreviation(char abbreviation){
-        final String abrv = String.valueOf(abbreviation).toUpperCase();
         for(Direction d : Direction.values()){
-            if(d.name().substring(0,1)
-                       .equalsIgnoreCase(abrv)){
+            if(d.name().charAt(0) == abbreviation){
                 return d;
             }
         }
