@@ -14,6 +14,11 @@ public class GameController {
 
     public void run() {
         System.out.println("Welcome to my Adventure game!");
+
+        int num = 3; // RIGHT
+        String val = Direction.getValueFromCorrespondingNumber(num);
+        System.out.format("Direction number: %d = Direction %s%n", num, val);
+
         Direction nextDirection = getNewDirection();
         System.out.println("You chose " + nextDirection);
     }
@@ -34,19 +39,21 @@ public class GameController {
      * @return a valid Direction enumerated value (see Direction.java)
      */
     public Direction getNewDirection() {
-
+        Direction dir;
         // the following is an example of Python's while True:
         do {
             try {
                 System.out.format("What direction [%s]?> ", getDisplayableDirectionValues());
                 String response = input.nextLine();
                 // if user gave us a number, try to convert it to its equivalent enum
-                if (responseIsANumber(response) ) {
+                if (isANumber(response) ) {
                     int idx = Integer.parseInt(response);
                     // Since direction numbers are 1-based, not zero-based, subtract 1 to the index
-                    response = String.valueOf(Direction.values()[idx - 1]);
+                    //response = Direction.getValueFromCorrespondingNumber(idx);
+                    dir = Direction.getDirectionFromNumber(idx);
+                } else {
+                    dir = Direction.valueOf(response.toUpperCase());
                 }
-                Direction dir = Direction.valueOf(response.toUpperCase());
                 return dir;
             } catch (Exception ex) {
                 System.out.format("Invalid direction!  Valid directions are %s%n", getDisplayableDirectionValues());
@@ -55,9 +62,9 @@ public class GameController {
         } while(true);
     }
 
-    private boolean responseIsANumber(String response) {
+    private boolean isANumber(String possibleWholeNumber) {
         try {
-            Integer.parseInt(response);
+            Integer.parseInt(possibleWholeNumber);
             return true;
         } catch (NumberFormatException ex) {
             return false;
