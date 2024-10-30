@@ -21,7 +21,7 @@ public class GameController {
     public static String getDisplayableDirectionValues(){
         String s = "";
         for (Direction d: Direction.values()) {
-            s += d.toString() + "(" + d.getAngle() + "), ";
+            s += d.toString() + "(" + d.getIndex() + "), ";
         }
 
         // trim off the trailing comma and extra space character

@@ -3,13 +3,13 @@ public enum Direction {
     FORWARD (2),
     RIGHT (3);
 
-    private Direction(final int angle) {
-        this.angle = angle;
+    private Direction(final int index) {
+        this.index = index;
     }
 
-    private int angle;
+    private final int index;
 
-    public int getAngle() {return angle;}
+    public int getIndex() {return index;}
 
 
 }
