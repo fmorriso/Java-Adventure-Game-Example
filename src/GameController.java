@@ -48,8 +48,6 @@ public class GameController {
                 // if user gave us a number, try to convert it to its equivalent enum
                 if (isANumber(response) ) {
                     int idx = Integer.parseInt(response);
-                    // Since direction numbers are 1-based, not zero-based, subtract 1 to the index
-                    //response = Direction.getValueFromCorrespondingNumber(idx);
                     dir = Direction.getDirectionFromNumber(idx);
                 } else {
                     dir = Direction.valueOf(response.toUpperCase());
