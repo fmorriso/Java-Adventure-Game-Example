@@ -34,4 +34,20 @@ public enum Direction {
     public static Direction getDirectionFromNumber(int num){
         return Direction.valueOf(getValueFromCorrespondingNumber(num));
     }
+
+    /** Look up the enumeration using a one-character abbreviation.
+     * @param abbreviation - a single character that we expect to match the first
+     *                     letter of one of the enumeration values.
+     * @return - a value from this enumeration or null if not found.
+     */
+    public static Direction getDirectionFromAbbreviation(char abbreviation){
+        final String abrv = String.valueOf(abbreviation).toUpperCase();
+        for(Direction d : Direction.values()){
+            if(d.name().substring(0,1)
+                       .equalsIgnoreCase(abrv)){
+                return d;
+            }
+        }
+        return null;
+    }
 }

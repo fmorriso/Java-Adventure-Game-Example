@@ -1,8 +1,13 @@
 import java.util.Scanner;
 
+/**
+ * The controller for this game.
+ * All other objects communicate with each other via this centralized
+ * controller, which decides which other object(s) to communicate with.
+ */
 public class GameController {
     private int health = 100;
-    private Scanner input = new Scanner(System.in);
+    private final Scanner input = new Scanner(System.in);
 
     public int getHealth() {
         return health;
@@ -21,14 +26,40 @@ public class GameController {
 
         Direction nextDirection = getNewDirection();
         System.out.println("You chose " + nextDirection);
+
+        nextDirection = getNewDirectionFromAbbreviation();
+        System.out.format("You chose %s%n", nextDirection);
+    }
+
+    private Direction getNewDirectionFromAbbreviation() {
+        Direction dir;
+        // the following is a Java equivalent of Python's while True:
+        do {
+            try {
+                System.out.format("What direction [%s]?> ", getDisplayableDirectionValues());
+                String response = input.nextLine();
+                // only care about the first character, which is hopefully l, L, r, R, F or f.
+                dir = Direction.getDirectionFromAbbreviation(response.charAt(0));
+                if (dir == null) {
+                    throw new Exception("Invalid direction. Try again.");
+                }
+                return dir;
+            } catch (Exception ex) {
+                System.out.format("Invalid direction!  Valid directions are %s%n", getDisplayableDirectionValues());
+            }
+
+        } while(true);
     }
 
     public static String getDisplayableDirectionValues(){
-        String s = "";
+        StringBuilder sbr = new StringBuilder();
         for (Direction d: Direction.values()) {
-            s += d.toString() + "(" + d.getIndex() + "), ";
+            sbr.append(d.toString())
+               .append("(")
+               .append(d.getIndex())
+               .append("), ");
         }
-
+        String s = sbr.toString();
         // trim off the trailing comma and extra space character
         int idx = s.lastIndexOf(",");
         s = s.substring(0, idx);
@@ -40,15 +71,15 @@ public class GameController {
      */
     public Direction getNewDirection() {
         Direction dir;
-        // the following is an example of Python's while True:
+        // the following is a Java equivalent of Python's while True:
         do {
             try {
                 System.out.format("What direction [%s]?> ", getDisplayableDirectionValues());
                 String response = input.nextLine();
                 // if user gave us a number, try to convert it to its equivalent enum
-                if (isANumber(response) ) {
+                if (isANumber(response)) {
                     int idx = Integer.parseInt(response);
-                    dir = Direction.getDirectionFromNumber(idx);
+                    dir = Direction.getDirectionFromNumber(idx); // Math.sqrt(44);
                 } else {
                     dir = Direction.valueOf(response.toUpperCase());
                 }
