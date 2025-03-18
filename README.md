@@ -9,7 +9,7 @@ An example of using Java to implement a simple Adventure game.
 | Java     | 24.0.0.0 |
 | IntelliJ | 2024.3.5 |
 
-## Change Historyx
+## Change History
 
 | Date       | Description                           |
 |:-----------|:--------------------------------------|
