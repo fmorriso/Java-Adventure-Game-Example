@@ -29,4 +29,14 @@ bin/
 .DS_Store
 
 ### JetBrains IntelliJ
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+/.idea
 .idea/
+.idea/**
+.idea/misc.xml
+.idea/workspace.xml
+workspace.xml
+.idea/**/workspace.xml
+*.iml
