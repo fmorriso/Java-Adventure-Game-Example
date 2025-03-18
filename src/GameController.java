@@ -17,7 +17,7 @@ public class GameController {
         this.health = health;
     }
 
-    public void run() {
+    public int run() {
         System.out.println("Welcome to my Adventure game!");
 
         int num = 3; // RIGHT
@@ -29,6 +29,11 @@ public class GameController {
 
         nextDirection = getNewDirectionFromAbbreviation();
         System.out.format("You chose %s%n", nextDirection);
+        if (nextDirection.equals(Direction.QUIT)) {
+            System.out.println("Thanks for playing");
+            return 0;
+        }
+        return 1;
     }
 
     private Direction getNewDirectionFromAbbreviation() {

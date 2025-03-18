@@ -2,16 +2,20 @@
  * An advanced enumeration in which each enumerated name as a specific whole number value.
  */
 public enum Direction {
-    LEFT (1),
-    FORWARD (2),
-    RIGHT (3);
+    LEFT ('L', 1),
+    FORWARD ('F', 2),
+    RIGHT ('R', 3),
+    QUIT('Q', 4);
 
-    private Direction(final int index) {
+    private Direction(char symbol, int index) {
+        this.symbol = symbol;
         this.index = index;
     }
 
+    private final char symbol;
     private final int index;
 
+    public char getSymbol() {return symbol;}
     public int getIndex() {return index;}
 
     /** Return a string representation of one of the enumerated values based on a
@@ -37,16 +41,18 @@ public enum Direction {
     }
 
     /** Look up the enumeration using a one-character abbreviation.
-     * @param abbreviation - a single character that we expect to match the first
+     * @param symbol - a single character that we expect to match the first
      *                     letter of one of the enumeration values.
      * @return - a value from this enumeration or null if not found.
      */
-    public static Direction getDirectionFromAbbreviation(char abbreviation){
-        for(Direction d : Direction.values()){
-            if(d.name().charAt(0) == abbreviation){
-                return d;
+    public static Direction getDirectionFromAbbreviation(char symbol) {
+        for (Direction direction : Direction.values()) {
+            if (direction.symbol == Character.toUpperCase(symbol)) {
+                return direction;
             }
         }
-        return null;
+        throw new IllegalArgumentException("Invalid direction character: " + symbol);
     }
+
+
 }
